@@ -1,6 +1,6 @@
 user: ubuntu
 group: ubuntu
-pid: tmp/thin.pid
+pid: tmp/pids/thin.pid
 timeout: 30
 wait: 30
 log: thin.log
