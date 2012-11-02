@@ -39,9 +39,9 @@ namespace :deploy do
 	end
 end
 
-namespace :sin do
-	task :log do
-		run "cat #{deploy_to}/current/thin.log"
-	end
-end
+#namespace :sin do
+#	task :log do
+#		run "cat #{deploy_to}/current/thin.log"
+#	end
+#end
 ~                                  
