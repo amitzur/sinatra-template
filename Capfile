@@ -16,6 +16,9 @@ role :db, "ec2-176-34-76-86.eu-west-1.compute.amazonaws.com"
 set :runner, user
 set :admin_runner, user
 
+set :rvm_ruby_string, '1.9.3@chibo'
+require 'rvm/capistrano'
+
 namespace :deploy do
 	task :start, :roles => [:web, :app] do
 		run "sudo service thin start"
@@ -41,8 +44,4 @@ namespace :sin do
 		run "cat #{deploy_to}/current/thin.log"
 	end
 end
-
-
-set :rvm_ruby_string, '1.9.3@chibo'
-require 'rvm/capistrano'
 ~                                  
