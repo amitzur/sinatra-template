@@ -42,7 +42,7 @@ namespace :deploy do
   task :cold do
 		deploy.update
 		deploy.update_thin
-	  deploy.start
+	  deploy.restart
 	end
 end
 
