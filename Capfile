@@ -34,13 +34,14 @@ namespace :deploy do
 		run "sudo service thin restart"
 	end
 
-	task :update, :roles => [:web, :app] do
+	task :update_thin, :roles => [:web, :app] do
 		run "sudo cp #{deploy_to}/current/thin_production.yml /etc/thin/sin_thin_production.yml"
 	end
 
 	# This will make sure that Capistrano doesn't try to run rake:migrate (this is not a Rails project!)
   task :cold do
 		deploy.update
+		deploy.update_thin
 	  deploy.start
 	end
 end
