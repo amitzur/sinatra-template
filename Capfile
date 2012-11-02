@@ -9,6 +9,8 @@ set :repository, "git://github.com/amitzur/sinatra-template.git"
 set :deploy_via, :remote_cache
 set :deploy_to, "/home/#{user}/webapps/production/#{application}"
 
+set :ssh_options, { :keys => [File.join(ENV["HOME"], ".ssh", "amitzur.pem")] }
+
 role :app, "ec2-176-34-76-86.eu-west-1.compute.amazonaws.com"
 role :web, "ec2-176-34-76-86.eu-west-1.compute.amazonaws.com"
 role :db, "ec2-176-34-76-86.eu-west-1.compute.amazonaws.com"
@@ -32,6 +34,10 @@ namespace :deploy do
 		run "sudo service thin restart"
 	end
 
+	task :update, :roles => [:web, :app] do
+		run "sudo cp #{deploy_to}/current/thin_production.yml /etc/thin/sin_thin_production.yml"
+	end
+
 	# This will make sure that Capistrano doesn't try to run rake:migrate (this is not a Rails project!)
   task :cold do
 		deploy.update
@@ -39,9 +45,3 @@ namespace :deploy do
 	end
 end
 
-#namespace :sin do
-#	task :log do
-#		run "cat #{deploy_to}/current/thin.log"
-#	end
-#end
-~                                  
